@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool.js');
 
-// GET ROUTE
+// Set up GET route to get all the to-do
 router.get('/', (req, res) => {
     const dbQuery = 'SELECT * FROM "table";';
   
