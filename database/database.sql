@@ -1,12 +1,12 @@
-CREATE TABLE "table" (
+CREATE TABLE "toDoList" (
 	"id" serial primary key,
 	"task" varchar(120) not null,
-	"status" varchar(80)
+	"status" boolean default
 );
 
-INSERT INTO "table" ("id", "task", "status")
+INSERT INTO "toDoList" ("task")
 VALUES 
-	('Make coffee', 'completed'),
+	('Make coffee'),
 	('Cook breakfast'),
 	('Wash the dishes'),
 	('Pack clothes to ship out'),
@@ -18,3 +18,6 @@ VALUES
 	('Sleep'
 );
 
+SELECT * FROM "toDoList";
+
+DROP TABLE "toDoList";
