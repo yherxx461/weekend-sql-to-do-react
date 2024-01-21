@@ -38,7 +38,7 @@ router.get('/', (req, res) => {
     })
   })
 
-  // PUT
+  // Set PUT route to update any new entry to the to-do list
   router.put('/:id', (req, res) => {
     const toDoId = parseInt(req.params.id);
 
@@ -55,7 +55,7 @@ router.get('/', (req, res) => {
     });
   });
   
-  // DELETE
+  // Set DELETE route to delete any current to-do item/list 
   router.delete('/:id', (req, res) => {
     const toDoId = parseInt(req.params.id);
     const queryText = `DELETE FROM "toDoList" WHERE "id" = $1;`;
