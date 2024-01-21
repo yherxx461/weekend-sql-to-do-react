@@ -12,8 +12,8 @@ router.get('/', (req, res) => {
         console.log(`Get stuff from the database`, result);
         res.send(result.rows);
       })
-      .catch((err) => {
-        console.log(`Error making database query`, err);
+      .catch((error) => {
+        console.log(`Error making database query`, error);
         res.sendStatus(500);
       });
   });
@@ -33,13 +33,28 @@ router.get('/', (req, res) => {
       res.sendStatus(201);
     })
     .catch((error) => {
-      // console.log(`Error making database query ${queryTextText}`, error);
+      // console.log(`Error making database query ${queryText}`, error);
       res.sendStatus(500);
     })
   })
 
   // PUT
+  router.put('/:id', (req, res) => {
+    const toDoId = parseInt(req.params.id);
 
+    const queryText = `UPDATE "toDoList" SET "status" = NOT "status" WHERE "id" = $1;`;
+    
+    pool
+    .query(queryText, [toDoId])
+    .then((response) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.error('Put error in updating database', error);
+      res.sendStatus(500);
+    });
+  });
+  
   // DELETE
 
 module.exports = router;
