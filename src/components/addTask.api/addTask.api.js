@@ -1,12 +1,12 @@
 import axios from "axios";
 
-// calling all axios call in this file
+// calling all axios call in this file. Thanks to Myron's lecture notes!
 
 export const fetchTasksList = () => {
     //axios GET call
     return axios.get('/api/todo', taskData);
 }; 
-
+ 
 export const postTaskList = (taskData) => {
     //axios POST call
     return axios.post('/api/todo', taskData);
