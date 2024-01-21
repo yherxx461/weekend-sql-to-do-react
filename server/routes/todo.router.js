@@ -56,5 +56,21 @@ router.get('/', (req, res) => {
   });
   
   // DELETE
+  router.delete('/:id', (req, res) => {
+    const toDoId = parseInt(req.params.id);
+    const queryText = `DELETE FROM "toDoList" WHERE "id" = $1;`;
+
+    pool
+    .query(queryText, [toDoId])
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.error(`Error in deleting database query ${queryText}`, error);
+      res.sendStatus(500)
+    });
+  });
+
+  module.exports = router;
 
 module.exports = router;
