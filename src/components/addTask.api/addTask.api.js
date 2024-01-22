@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const fetchTasksList = () => {
     //axios GET call
-    return axios.get('/api/todo', taskData);
+    return axios.get('/api/todo');
 }; 
  
 export const postTaskList = (taskData) => {
