@@ -18,7 +18,7 @@ export const deleteTask = (taskId) => {
     return axios.delete(`/api/todo/${taskId}`);
 };
 
-export const updatedTaskList = (taskId) => {
+export const updateTaskCompleteStatus = (taskId) => {
     //axios PUT call
     return axios.put(`/api/todo/${taskId}`);
 };

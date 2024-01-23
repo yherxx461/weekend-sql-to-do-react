@@ -33,16 +33,33 @@ router.get('/', (req, res) => {
       res.sendStatus(201);
     })
     .catch((error) => {
-      // console.log(`Error making database query ${queryText}`, error);
+      console.log(`Error making database query ${queryText}`, error);
       res.sendStatus(500);
     })
   })
 
+  
+  // Set DELETE route to delete any current to-do item/list 
+  router.delete('/:id', (req, res) => {
+    const toDoId = parseInt(req.params.id);
+    const queryText = `DELETE FROM "toDoList" WHERE "id" = $1;`;
+    
+    pool
+    .query(queryText, [toDoId])
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.error(`Error in deleting database query ${queryText}`, error);
+      res.sendStatus(500)
+    });
+  });
+  
   // Set PUT route to update any new entry to the to-do list
   router.put('/:id', (req, res) => {
     const toDoId = parseInt(req.params.id);
 
-    const queryText = `UPDATE "toDoList" SET "status" = NOT "status" WHERE "id" = $1;`;
+    const queryText = `UPDATE "toDoList" SET "status" = NOT "status" WHERE "id" =$1;`;
     
     pool
     .query(queryText, [toDoId])
@@ -55,20 +72,5 @@ router.get('/', (req, res) => {
     });
   });
   
-  // Set DELETE route to delete any current to-do item/list 
-  router.delete('/:id', (req, res) => {
-    const toDoId = parseInt(req.params.id);
-    const queryText = `DELETE FROM "toDoList" WHERE "id" = $1;`;
-
-    pool
-    .query(queryText, [toDoId])
-    .then((result) => {
-      res.sendStatus(200);
-    })
-    .catch((error) => {
-      console.error(`Error in deleting database query ${queryText}`, error);
-      res.sendStatus(500)
-    });
-  });
-
-module.exports = router;
+  module.exports = router;
+  

@@ -1,21 +1,16 @@
 CREATE TABLE "toDoList" (
 	"id" serial primary key,
 	"task" varchar(120) not null,
-	"status" boolean default
+	"status" boolean default false
 );
 
 INSERT INTO "toDoList" ("task")
 VALUES 
-	('Make coffee'),
-	('Cook breakfast'),
-	('Wash the dishes'),
-	('Pack clothes to ship out'),
+	('Make breakfast'),
+	('Group acitivity'),
 	('Drop of packages at post office'),
 	('Grocery Shopping'),
-	('Do laundary'),
-	('Cook dinner'),
-	('Shower'),
-	('Sleep'
+	('Do laundary'
 );
 
 SELECT * FROM "toDoList";

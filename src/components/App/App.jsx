@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import { deleteTask, fetchTasksList } from '../AddTask.api/addTask.api';
+import { deleteTask, fetchTasksList, updateTaskCompleteStatus } from '../AddTask.api/addTask.api';
 import AddTaskForm from '../AddTaskForm/AddTaskForm';
 
 
@@ -8,6 +8,7 @@ function App () {
 
   const refreshTasks = () => {
     const taskPromise = fetchTasksList();
+    
     taskPromise
     // success
     .then((response) => {
@@ -27,8 +28,19 @@ function App () {
     refreshTasks();
   }, []);
 
+  const handleCompleteTask = (taskId) => {
+    console.log('Updating complete status', taskId);
+    updateTaskCompleteStatus(taskId)
+      .then((response) => {
+        refreshTasks();
+      })
+      .catch((error) => {
+        console.error('ERROR in updating status')
+      })
+  }
+  
   const handleClickDeleteTask = (taskId) => {
-    console.log('DELETE taskId', taskId);
+    console.log('Deleting task off list', taskId);
     deleteTask(taskId)
     .then((response) => {
       refreshTasks();
@@ -37,6 +49,7 @@ function App () {
       console.error('ERROR in deleting task', error);
     })
   }
+
   
   return (
     <div>
@@ -50,7 +63,7 @@ function App () {
           {taskList.map((taskData, dataIndex) => {
           return (
             <div key={dataIndex}>
-            <input type="checkbox" placeholder="Complete?" onClick={(event) => handleCompleteTask(taskData.id)}></input>
+            <input type="checkbox" onClick={(event) => handleCompleteTask(taskData.id)}></input>
               <p>Task#{dataIndex +1}: {taskData.task}</p>
               {/* <p>Status: {taskData.status}</p> */}
               <button onClick={(event) => handleClickDeleteTask(taskData.id)}>Delete</button>
