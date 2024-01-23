@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react';
 import { deleteTask, fetchTasksList, updateTaskCompleteStatus } from '../AddTask.api/addTask.api';
 import AddTaskForm from '../AddTaskForm/AddTaskForm';
+import { Box, Button, Checkbox, Grid } from '@mui/material';
+
 
 
 function App () {
@@ -38,7 +40,7 @@ function App () {
         console.error('ERROR in updating status')
       })
   }
-  
+
   const handleClickDeleteTask = (taskId) => {
     console.log('Deleting task off list', taskId);
     deleteTask(taskId)
@@ -50,7 +52,6 @@ function App () {
     })
   }
 
-  
   return (
     <div>
       <h1>TO-DO APP</h1>
@@ -78,4 +79,42 @@ function App () {
 
 }
 
-export default App
+export default App;
+//   return (
+//     <div>
+//       <main>
+//         <h1>TO-DO APP</h1>
+//           <AddTaskForm taskRefreshCallback={refreshTasks} />
+//           {/* Rendering the list to the client DOM */}
+//           <h2>Saturday's To-Do List</h2>
+//           {taskList.map((taskData, dataIndex) => {
+//           return (
+//             <Grid 
+//             item 
+//             xs={8}
+//             xd={6}
+//             lg={4}
+//             onClick={(event) => handleCompleteTask(taskData.id)}>
+//               <Box
+//               borderRadius={5}
+//               border={
+//                 taskData.statusComplete
+//                 ? '3px solid rbg (113, 253, 56)'
+//                 : '3px solid ${green[435]'
+//               }
+//               sx={{
+//                 margin: '10px',
+//                 padding: '10px',
+//                 }}
+//                 />
+//               <Checkbox/>
+//               <p>Task#{dataIndex +1}: {taskData.task}</p>
+//               {/* <p>Status: {taskData.status}</p> */}
+//               <Button onClick={(event) => handleClickDeleteTask(taskData.id)}>Delete</Button>
+//               )
+//               </Grid>
+//               </main>
+
+//               </div>
+//               }
+// export default App
