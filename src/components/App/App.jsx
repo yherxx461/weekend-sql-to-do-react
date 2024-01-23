@@ -1,5 +1,7 @@
-import {useEffect, useState} from 'react';
-import { fetchTasksList } from '../addTask.api/addTask.api';
+import {useState, useEffect} from 'react';
+import { deleteTask, fetchTasksList } from '../AddTask.api/addTask.api';
+import AddTaskForm from '../AddTaskForm/AddTaskForm';
+
 
 function App () {
   const [taskList, setTaskList] = useState([]);
@@ -24,12 +26,39 @@ function App () {
     console.log('Initialized original to-do list successful');
     refreshTasks();
   }, []);
+
+  const handleClickDeleteTask = (taskId) => {
+    console.log('DELETE taskId', taskId);
+    deleteTask(taskId)
+    .then((response) => {
+      refreshTasks();
+    })
+    .catch((error) => {
+      console.error('ERROR in deleting task', error);
+    })
+  }
   
   return (
     <div>
-      <h1>TO DO APP</h1>
+      <h1>TO-DO APP</h1>
       <div>
-      <p>{ fetchTasksList}</p>
+        <div>
+          <main>
+          <AddTaskForm taskRefreshCallback={refreshTasks} />
+          {/* Rendering the list to the client DOM */}
+          <h2>Saturday's To-Do List</h2>
+          {taskList.map((taskData, dataIndex) => {
+          return (
+            <div key={dataIndex}>
+            <input type="checkbox" placeholder="Complete?" onClick={(event) => handleCompleteTask(taskData.id)}></input>
+              <p>Task#{dataIndex +1}: {taskData.task}</p>
+              {/* <p>Status: {taskData.status}</p> */}
+              <button onClick={(event) => handleClickDeleteTask(taskData.id)}>Delete</button>
+              </div>
+              )
+            })}
+          </main>
+        </div>
       </div>
     </div>
   );

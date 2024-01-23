@@ -9,6 +9,7 @@ export const fetchTasksList = () => {
  
 export const postTaskList = (taskData) => {
     //axios POST call
+    console.log('taskData in POST api', taskData);
     return axios.post('/api/todo', taskData);
 };
 

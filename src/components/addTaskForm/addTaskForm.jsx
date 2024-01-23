@@ -1,49 +1,53 @@
-import { response } from "express";
-import { useState } from useState;
-import { postTaskList } from "../addTask.api/addTask.api";
+// import { response } from "express";
+import { useState } from 'react';
+import { postTaskList } from "../AddTask.api/addTask.api";
 
-function addTaskForm(props) {
+function AddTaskForm(props) {
     const [taskValue, setTaskValue] = useState('');
-    const [statusValue, setStatusValue] = useState('');
+    // const [statusValue, setStatusValue] = useState('');
 
-      };
+    // const handleChangeofStatus = (event) => {
+    //     setStatusValue(event.target.value);
+    // }
     
-      const handleSubmitTask = (event) => {
-        event.preventDefault();
-        console.log('Values for SUBMIT:', {
-          task: taskValue,
-        }); 
-      }    
-
-      // post data
-      postTaskList({
+    const handleSubmitTask = (event) => {
+    event.preventDefault();
+    console.log('Values for SUBMIT:', {
         task: taskValue,
-        status: statusValue,
-      })
-      .then((response) => {
-        props.taskRefreshCall();
+        // status: statusValue,
+    });     
 
-        setTaskValue('');
-        setStatusValue('');
-      })
+    // post data
+    postTaskList({
+    task: taskValue,
+    // status: statusValue,
+    })
+    .then((response) => {
+    props.taskRefreshCallback();
+
+    setTaskValue('');
+    // setStatusValue('');
+    })
+    .catch((error) => {
+    console.error('ERROR posting data to the client side', error);
+    })
+};
 
 return (
     <form onSubmit={handleSubmitTask}> 
         <label>
-            <span>
+            <span>Task</span>
                 <input id="task" onChange={(event) => setTaskValue(event.target.value)} 
                 value={taskValue}
                 />
-                     </span>
                 </label>
-                <label>
-                    <span>
-                        <input id="status" onChange={(event) => setStatusValue(event.target.value)}
-                        />
-                    </span>
-                </label>
+                {/* <label>
+                    <span>Status</span>
+                        <input id="status" onChange={handleChangeofStatus} value={statusValue}/>
+                </label> */}
             <button type="submit">Add Task</button>
     </form>
 );
+};
 
-export default addTaskForm;
+export default AddTaskForm;
