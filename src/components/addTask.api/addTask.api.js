@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// calling all axios call in this file. Thanks to Myron's lecture notes!
+//Axio Calls
 
 export const fetchTasks = () => {
   //axios GET call
