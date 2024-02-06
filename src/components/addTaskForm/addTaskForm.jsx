@@ -1,16 +1,15 @@
 // import { response } from "express";
 import { useState } from 'react';
 import { postTask } from '../addTask.api/addTask.api';
-
-// import { TextField } from '@mui/material';
+import { TextField, Button } from '@mui/material';
 
 function AddTaskForm(props) {
   const [taskValue, setTaskValue] = useState('');
-  const [statusValue, setStatusValue] = useState('');
+  const [statusValue, setStatusValue] = useState('FALSE');
 
-  // const handleChangeofStatus = (event) => {
-  //   setStatusValue(event.target.value);
-  // };
+  const handleChangeofStatus = (event) => {
+    setStatusValue(event.target.value);
+  };
 
   const handleSubmitTask = (event) => {
     event.preventDefault();
@@ -36,23 +35,45 @@ function AddTaskForm(props) {
   };
 
   return (
-    <form onSubmit={handleSubmitTask}>
-      <label>
-        {/* <span>New Task</span> */}
-        <input
-          id="task"
-          onChange={(event) => setTaskValue(event.target.value)}
-          value={taskValue}
-          placeholder="new task"
-        />
-      </label>
-      {/* <label>
-                    <span>Status</span>
-                        <input id="status" onChange={handleChangeofStatus} value={statusValue}/>
-                </label> */}
-      <button type="submit">Add</button>
+    // <form onSubmit={handleSubmitTask}>
+    //   <label>
+    //     {/* <span>New Task</span> */}
+    //     <input
+    //       id="task"
+    //       onChange={(event) => setTaskValue(event.target.value)}
+    //       value={taskValue}
+    //       placeholder="new task"
+    //     />
+    //   </label>
+    //   <label
+    //     id="status"
+    //     onChange={handleChangeofStatus}
+    //     value={statusValue}
+    //   ></label>
+    //   <button type="submit">Add</button>
+    // </form>
+    <form className="task-form" onSubmit={handleSubmitTask}>
+      <TextField
+        id="outlined-basic"
+        label="new task"
+        variant="outlined"
+        size="small"
+        sx={{
+          margin: '10px',
+        }}
+        onChange={(event) => setTaskValue(event.target.value)}
+        value={taskValue}
+        // placeholder="new task"
+      />
+      <Button
+        type="submit"
+        variant="text"
+        size="medium"
+        sx={{ margin: '10px' }}
+      >
+        add
+      </Button>
     </form>
-    // <form className="task-form" onSubmit={handleSubmitTask}></form>
   );
 }
 

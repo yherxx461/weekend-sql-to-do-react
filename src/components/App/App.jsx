@@ -9,6 +9,7 @@ import {
 
 function App() {
   const [taskList, setTaskList] = useState([]);
+  const [taskStatus, setTaskStatus] = useState([]);
 
   const refreshTasks = () => {
     const taskPromise = fetchTasks();
@@ -43,16 +44,16 @@ function App() {
       });
   };
 
-  const handleCompleteTask = (taskId) => {
-    console.log('Updating complete status', taskId);
-    updateTaskStatus(taskId)
-      .then((response) => {
-        refreshTasks();
-      })
-      .catch((error) => {
-        console.error('ERROR in updating status');
-      });
-  };
+  // const handleCompleteTask = (taskId) => {
+  //   console.log('Updating complete status', taskId);
+  //   updateTaskStatus(taskId)
+  //     .then((response) => {
+  //       refreshTasks();
+  //     })
+  //     .catch((error) => {
+  //       console.error('ERROR in updating status');
+  //     });
+  // };
 
   return (
     <div>
@@ -81,10 +82,9 @@ function App() {
                   )}
 
                   <button
+                    // onClick={(event) => handleCompleteTask(taskData.id)}
                     onClick={(event) => handleClickDeleteTask(taskData.id)}
-                  >
-                    complete
-                  </button>
+                  ></button>
                 </div>
               );
             })}
