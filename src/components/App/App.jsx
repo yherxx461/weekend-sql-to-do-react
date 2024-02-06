@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
+
+import AddTaskForm from '../AddTaskForm/AddTaskForm';
 import {
   deleteTask,
-  fetchTasksList,
-  updateTaskCompleteStatus,
-} from '../AddTask.api/addTask.api';
-import AddTaskForm from '../AddTaskForm/AddTaskForm';
-// import { Box, Button, Checkbox, Grid } from '@mui/material';
+  fetchTasks,
+  updateTaskStatus,
+} from '../addTask.api/addTask.api';
 
 function App() {
   const [taskList, setTaskList] = useState([]);
 
   const refreshTasks = () => {
-    const taskPromise = fetchTasksList();
+    const taskPromise = fetchTasks();
 
     taskPromise
       // success
@@ -32,17 +32,6 @@ function App() {
     refreshTasks();
   }, []);
 
-  const handleCompleteTask = (taskId) => {
-    console.log('Updating complete status', taskId);
-    updateTaskCompleteStatus(taskId)
-      .then((response) => {
-        refreshTasks();
-      })
-      .catch((error) => {
-        console.error('ERROR in updating status');
-      });
-  };
-
   const handleClickDeleteTask = (taskId) => {
     console.log('Deleting task off list', taskId);
     deleteTask(taskId)
@@ -54,30 +43,48 @@ function App() {
       });
   };
 
+  const handleCompleteTask = (taskId) => {
+    console.log('Updating complete status', taskId);
+    updateTaskStatus(taskId)
+      .then((response) => {
+        refreshTasks();
+      })
+      .catch((error) => {
+        console.error('ERROR in updating status');
+      });
+  };
+
   return (
     <div>
       <h1>TO-DO APP</h1>
       <div>
         <div>
+          <AddTaskForm taskRefreshCallback={refreshTasks} />
+          <h2>Saturday's To-Do List</h2>
           <main>
-            <AddTaskForm taskRefreshCallback={refreshTasks} />
             {/* Rendering the list to the client DOM */}
-            <h2>Saturday's To-Do List</h2>
             {taskList.map((taskData, dataIndex) => {
               return (
                 <div key={dataIndex}>
-                  <p>
+                  {/* <p>
                     {dataIndex + 1}: {taskData.task}
-                  </p>
+                  </p> */}
                   {/* <p>Status: {taskData.status}</p> */}
+                  {taskData.status === false ? (
+                    <p>
+                      {dataIndex + 1}: {taskData.task}
+                    </p>
+                  ) : (
+                    <p style={{ textDecoration: 'line-through' }}>
+                      {dataIndex + 1}: {taskData.task}
+                    </p>
+                  )}
+
                   <button
                     onClick={(event) => handleClickDeleteTask(taskData.id)}
                   >
-                    Delete
+                    complete
                   </button>
-                  <input
-                    onClick={(event) => handleCompleteTask(taskData.id)}
-                  ></input>
                 </div>
               );
             })}

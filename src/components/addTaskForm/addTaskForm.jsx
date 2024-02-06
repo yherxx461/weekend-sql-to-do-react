@@ -1,32 +1,34 @@
 // import { response } from "express";
 import { useState } from 'react';
-import { postTask } from '../AddTask.api/addTask.api';
+import { postTask } from '../addTask.api/addTask.api';
+
+// import { TextField } from '@mui/material';
 
 function AddTaskForm(props) {
   const [taskValue, setTaskValue] = useState('');
-  // const [statusValue, setStatusValue] = useState('');
+  const [statusValue, setStatusValue] = useState('');
 
   // const handleChangeofStatus = (event) => {
-  //     setStatusValue(event.target.value);
-  // }
+  //   setStatusValue(event.target.value);
+  // };
 
   const handleSubmitTask = (event) => {
     event.preventDefault();
     console.log('Values for SUBMIT:', {
       task: taskValue,
-      // status: statusValue,
+      status: statusValue,
     });
 
     // post data
     postTask({
       task: taskValue,
-      // status: statusValue,
+      status: statusValue,
     })
       .then((response) => {
         props.taskRefreshCallback();
 
         setTaskValue('');
-        // setStatusValue('');
+        setStatusValue('');
       })
       .catch((error) => {
         console.error('ERROR posting data to the client side', error);
@@ -36,19 +38,21 @@ function AddTaskForm(props) {
   return (
     <form onSubmit={handleSubmitTask}>
       <label>
-        <span>New Task</span>
+        {/* <span>New Task</span> */}
         <input
           id="task"
           onChange={(event) => setTaskValue(event.target.value)}
           value={taskValue}
+          placeholder="new task"
         />
       </label>
       {/* <label>
                     <span>Status</span>
                         <input id="status" onChange={handleChangeofStatus} value={statusValue}/>
                 </label> */}
-      <button type="submit">Add Task</button>
+      <button type="submit">Add</button>
     </form>
+    // <form className="task-form" onSubmit={handleSubmitTask}></form>
   );
 }
 
