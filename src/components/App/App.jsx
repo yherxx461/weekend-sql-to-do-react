@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Button } from '@mui/material';
 
 import AddTaskForm from '../AddTaskForm/AddTaskForm';
 import {
@@ -44,7 +45,7 @@ function App() {
       });
   };
 
-  // const handleCompleteTask = (taskId) => {
+  // const handleTaskStatus = (taskId) => {
   //   console.log('Updating complete status', taskId);
   //   updateTaskStatus(taskId)
   //     .then((response) => {
@@ -81,10 +82,12 @@ function App() {
                     </p>
                   )}
 
-                  <button
-                    // onClick={(event) => handleCompleteTask(taskData.id)}
+                  <Button
+                    // onClick={(event) => handleTaskStatus(taskData.id)}
                     onClick={(event) => handleClickDeleteTask(taskData.id)}
-                  ></button>
+                  >
+                    Delete
+                  </Button>
                 </div>
               );
             })}
