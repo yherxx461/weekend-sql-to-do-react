@@ -45,16 +45,16 @@ function App() {
       });
   };
 
-  // const handleTaskStatus = (taskId) => {
-  //   console.log('Updating complete status', taskId);
-  //   updateTaskStatus(taskId)
-  //     .then((response) => {
-  //       refreshTasks();
-  //     })
-  //     .catch((error) => {
-  //       console.error('ERROR in updating status');
-  //     });
-  // };
+  const handleTaskStatus = (taskId) => {
+    console.log('Updating complete status', taskId);
+    updateTaskStatus(taskId)
+      .then((response) => {
+        refreshTasks();
+      })
+      .catch((error) => {
+        console.error('ERROR in updating status');
+      });
+  };
 
   return (
     <div>
@@ -83,7 +83,9 @@ function App() {
                   )}
 
                   <Button
-                    // onClick={(event) => handleTaskStatus(taskData.id)}
+                    onClick={(event) => handleTaskStatus(taskData.id)}
+                  ></Button>
+                  <Button
                     onClick={(event) => handleClickDeleteTask(taskData.id)}
                   >
                     Delete

@@ -7,7 +7,7 @@ function AddTaskForm(props) {
   const [taskValue, setTaskValue] = useState('');
   const [statusValue, setStatusValue] = useState('FALSE');
 
-  const handleChangeofStatus = (event) => {
+  const handleChangeOfStatus = (event) => {
     setStatusValue(event.target.value);
   };
 
@@ -47,7 +47,7 @@ function AddTaskForm(props) {
     //   </label>
     //   <label
     //     id="status"
-    //     onChange={handleChangeofStatus}
+    //     onChange={handleChangeOfStatus}
     //     value={statusValue}
     //   ></label>
     //   <button type="submit">Add</button>
@@ -73,6 +73,9 @@ function AddTaskForm(props) {
       >
         add
       </Button>
+      <label>
+        <span id="status" onChange={handleChangeOfStatus} value={statusValue} />
+      </label>
     </form>
   );
 }
