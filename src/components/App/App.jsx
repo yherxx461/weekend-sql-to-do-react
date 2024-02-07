@@ -82,9 +82,9 @@ function App() {
                     </p>
                   )}
 
-                  <Button
+                  {/* <Button
                     onClick={(event) => handleTaskStatus(taskData.id)}
-                  ></Button>
+                  ></Button> */}
                   <Button
                     onClick={(event) => handleClickDeleteTask(taskData.id)}
                   >
