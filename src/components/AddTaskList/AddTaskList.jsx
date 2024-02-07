@@ -15,7 +15,7 @@ function AddTaskList({ taskData, taskRefreshCallback }) {
     // ID item
     console.log('DELETE - taskId:', taskId);
     // MAKE Axios Call
-    deleteTasks(taskId)
+    deleteTask(taskId)
       .then((response) => {
         taskRefreshCallback();
       })
